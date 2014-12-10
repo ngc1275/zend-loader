@@ -20,5 +20,14 @@
     "require-dev": {
         "phalcon/zephir": "*",
         "phpunit/PHPUnit": "3.7.*"
+    },
+    "authors": [
+        {
+            "name": "Igor Golovanov",
+            "email": "igor.golovanov@gmail.com"
+        }
+    ],
+    "replace": {
+        "zendframework/zend-loader": "self.version"
     }
 }
