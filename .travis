@@ -1,0 +1,31 @@
+language: php
+
+php:
+  - 5.3
+  - 5.4
+  - 5.5
+  - 5.6
+
+install:
+  - sudo apt-get install parallel
+  - composer install --dev --prefer-source
+
+before_script:
+  - mkdir -p build/coverage
+  - cp unit-tests/TestConfiguration.php.travis unit-tests/TestConfiguration.php
+  - (cd vendor/phalcon/zephir; ./unit-tests/ci/before_install.sh; ./install)
+  - ./vendor/bin/zephir generate
+  - (cd ext; export CFLAGS="-g3 -O1 -std=gnu90 -Wall -DZEPHIR_RELEASE=1"; phpize && ./configure --enable-zend_loader && make --silent -j4 && sudo make --silent install && phpenv config-add ../tests/ci/zend_loader.ini)
+  - ulimit -c unlimited || true
+
+script:
+  # Run tests for the various components in parallel
+  - ls -d tests/ZendTest/* | parallel --gnu --keep-order 'phpenv config-add unit-tests/ci/zend_loader.ini; echo "Running {} tests"; ./vendor/bin/phpunit -c unit-tests/phpunit.xml.dist {};' || exit 1
+
+
+after_failure:
+  - ./unit-tests/ci/after_failure.sh
+
+notifications:
+  email:
+    - igor.golovanov@gmail.com

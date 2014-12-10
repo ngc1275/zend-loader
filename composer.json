@@ -1,0 +1,24 @@
+{
+    "name": "zendframework-c/zend-loader",
+    "description": "Zend Framework (Loader Component) delivered as a C-extension (Zephir)",
+    "keywords": [
+        "zf2",
+        "loader",
+        "zendframework",
+        "extension",
+        "zend",
+        "zephir"
+    ],
+    "homepage": "https://github.com/zendframework/zend-loader",
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/zendframework/zend-loader/issues?state=open"
+    },
+    "require": {
+        "php": ">=5.3.23"
+    },
+    "require-dev": {
+        "phalcon/zephir": "*",
+        "phpunit/PHPUnit": "3.7.*"
+    }
+}
