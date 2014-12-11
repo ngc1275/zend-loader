@@ -19,7 +19,7 @@ before_script:
 
 script:
   # Run tests for the various components in parallel
-  - ls -d tests/ZendTest/* | parallel --gnu --keep-order 'phpenv config-add unit-tests/ci/zend_loader.ini; echo "Running {} tests"; ./vendor/bin/phpunit -c unit-tests/phpunit.xml.dist {};' || exit 1
+  - ls -d tests/ZendTest/* | parallel --gnu --keep-order 'phpenv config-add tests/ci/zend_loader.ini; echo "Running {} tests"; ./vendor/bin/phpunit -c tests/phpunit.xml.dist {};' || exit 1
 
 
 after_failure:
